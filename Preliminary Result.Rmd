@@ -1,0 +1,963 @@
+---
+title: "Report 2 Ring"
+author: "Ring Feng"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(networkDynamic)
+```
+
+Note: The following is a brief overview of our methodology. We haven’t finalized the data-cleaning strategy yet. Hence, for this report, I use the ICB dyad interstate conflict dataset for threat tie, as well as the COW alliance dataset for support tie, as examples for visualization.
+
+
+# Hypothesis
+
+This research extends the work of Yoder and Cohen (2025) to substantiate the result derived from their formal model, focusing on abandonment concerns between allies. Their formal model shows that the potential ally can reassure the patron ally through pre-alliance bargaining with a third party. When the patron has abandonment concerns, defined as the patron’s perception that the potential ally might abandon the patron when facing an external threat in the future after the alliance is established, the potential ally can signal the incentive to maintain the alliance by demonstrating higher preference compatibility with the patron, by making a harder-line demand toward a common rival and offering concessions to the patron’s client. This formal model implies that the prospect of an alliance between the patron and the potential ally can prevent conflict with the patron’s client but promote conflict with common rivals. Therefore, according to the formal model, four hypotheses are derived as following (in the following, suppose patron is P, potential ally is A, client is C, common rival is R): 
+
+# Bargaining with Common Threat
+
+H1a: The potential ally would be less likely to incite conflict when the patron and the potential ally share a common threat tie but have high preference compatibility, compared to cases where there is moderate preference compatibility.
+
+Sub-hypothesis: The effect of preference compatibility on conflict initiation would be stronger when the ally is a potential ally than when the ally is a current ally.
+
+H1a is the main outcome from the model in which the potential ally has an incentive to engage in costly signaling of their type to reassure the patron and encourage the patron to choose to ally when preference compatibility is moderate, implying that abandonment concerns are acute. When preference compatibility is high, the potential ally has no incentive to reassure the patron, since high preference compatibility signals low abandonment concerns and the patron will be willing to choose to ally from the outset.
+
+A potential interaction variable for this research is the degree of current support between the potential ally and the patron. If there is already a high support tie between A and P, A may be less inclined to reassure P further by inciting conflict, since a prior high support tie might signal that P is already reassured. But if there is low or no prior support tie between A and P, such a signaling mechanism does not exist, and A is more inclined to reassure P, especially when preference compatibility is moderate.
+
+Empirical approach:
+Outcome: Threat tie from A to R
+Scope (potential ally): Threat from R to A and R to P
+Explanatory variable/process: Preference compatibility between A and P
+Interaction: Preference compatibility between A and P and degree of existing support between A and P.
+
+To test H1a, the explanatory variable is the preference compatibility between the potential ally and the patron (moderate or high), and the outcome is the threat tie from the potential ally to the common rival. H1a will be supported if we observe statistically significant evidence that the threat tie from the potential ally to the common rival is greater when preference compatibility is moderate than when it is high. The scope condition of H1a is that R is a common rival to both the potential ally and the patron. 
+
+We will include the level of existing support between A and P (a weighted tie) as an interaction with preference compatibility. The level of support can be built as an index from the different types of support in the data.
+
+Additional consideration: H1a assumes that the alliance is valuable to the potential ally. If the alliance is not essential to the potential ally, the potential ally will not put any effort into convincing the patron to form an alliance, since the benefit is minimal. Therefore, we might need to limit the scope condition to situations where the alliance is crucial for the potential ally. At minimum, we will control for geographic proximity, P’s military capabilities, and the level of threat that A is experiencing.
+
+H1b: When conflict is incited by the potential ally against the common rival, there will be a stronger support tie between the potential ally and the patron. In addition, the strength of the effect should be higher when A and P are not well aligned.
+  
+H1b is a further assumption of H1a, as explained by the theory. If provoking conflict cannot even generally reassure the patron, then the potential ally has no reason to incite conflict in an effort to signal the patron. The explanatory variable would be the threat tie from the potential ally and the common rival, and the outcome would be the support tie from the patron to the potential ally. A confounder for H1b would be the preference compatibility between the patron and the potential ally, since if A and P are well aligned (high compatibility), inciting the conflict will not significantly increase the patron's support, because the patron is already reassured and would ally even without the conflict. But if A and P are not well aligned (moderate compatibility), inciting the conflict will significantly increase the patron's support, because the patron is reassured only when the conflict is incited, and without it, P will not choose to ally due to abandonment concerns. Therefore, we set the preference compatibility between A and P as an interaction.
+
+Empirical Approach:
+Outcome: Support tie from P to A
+Explanatory: Threat tie from A to R
+Interact: Preference compatibility between A and P and threat tie from A to R
+ 
+# Bargaining with another client
+
+H2a: The potential ally is more likely to offer concessions to another client when the patron and the potential ally have moderate preference compatibility compared to cases where they have high preference compatibility.
+
+Sub-hypothesis: The effect of preference compatibility on offering concessions would be stronger when the ally is a potential ally than when the ally is a current ally.
+ 
+H2a follow directly from the model. When the potential ally and the patron’s preferences are highly aligned (the potential ally knows that the patron perceives their preference compatibility as high), the potential ally does not need to offer concessions to another client to reassure the patron. On the other hand, when interests are not aligned, the potential ally is more likely to offer concessions to (and be less likely to threaten) another client, suggesting a lower inclination for conflict.
+
+Similar to H1, the explanatory variable would be preference compatibility between A and P, with a potential interaction being the degree of existing support between A and P (a potential sub-hypothesis is also stated above). The outcome of H3a would be the concessions from A to C. These would be measured by any strategy A took to lower the threat tie between A and C, which could be measured by a reduction in sanctions or the severance of an existing threat tie..
+
+Empirical Approach:
+
+Outcome for H2a: Concessions from A to C. 
+One possible measure: If A and C have a threat tie, A ends the tie. 
+Explanatory variable: Preference compatibility between A and P
+Interaction: Degree of support from A to P and preference compatibility between A and P
+
+H2b (assumption of H2a): When the concession is made by the potential ally to the client, there will be a stronger support tie between the potential ally and the patron. In addition, the strength of the effect should be higher when A and P are not well aligned.
+ 
+H2b is an assumption of H2a, similar to H1. H2b entails that the offering of concessions to a patron’s client influences that patron’s decision to offer stronger support to the potential ally. The outcome would be the support tie from P to A and the explanatory variable would be the concessions from A to C. A potential confounder is the preference compatibility between A and P since if A and P is well aligned (high compatibility), concession will not significantly increase the patron's support as the patron is already reassured and would ally even without the concession. But if A and P are not well aligned (moderate compatibility), concession will significantly increase the patron's support, because the patron is reassured only when the concession is offered, and without it, P will not choose to ally due to abandonment concerns. Therefore, we set the preference compatibility between A and P as an interaction.
+
+Empirical Approach:
+Outcome: Support tie from P to A
+Explanatory variable: Concessions from A to C
+Interaction: Concessions from A to C and preference compatibility between A and P
+
+
+# Methodology
+
+To measure preference compatibility, we use a country-year ideal policy preference index estimated from UNGA voting data (Bailey et al., 2017). A positive value of the index indicates that, in a given year, the country’s foreign policy is aligned with the American/Western liberal order. A negative value indicates that the country’s foreign policy is anti-American/anti-Western in that year. Preference compatibility is ideally measured by the absolute value of the difference in the ideal policy preference index between two countries. Thresholds are needed to determine whether the preference compatibility is high/medium/low (since the policy preference index follows a normal distribution, a possible method would be for example: high if within one standard deviation, medium if within two standard deviations, TBD).
+
+To measure support and threat ties between countries, we recognize multiple approaches. Possible support measures include: COW Formal Alliance, ATOP Alliance, DCA dyads, DESTA data, UCDP external support, and arms trade from SIPR, which range from formal alliances to trade dependence. There are also multiple ways to measure the threat tie between two countries, including: MIC-TDD, DESTA, Near crisis data dyad, Strategic rivalries dyad, UCDP external support, Global sanction database, ICB, and fatalities. Using only one of these measures could introduce bias. However, if we include all these measures, ranging from military behavior to trade patterns, we need to consider how much weight to assign to each variable when synthesizing them into a single support or threat tie index. Therefore, we will use a Bayesian IRT model to estimate the weight for each variable, producing a latent support/threat score that allows us to put more weight on strong indicators of support or threat. Although the latent threat/support tie index is continuous, we will translate it into a binary variable since we will use an SAOM model for our network analysis. The threshold for determining whether the tie exists will be based on the distribution of the index.
+
+Since we are testing the effect of preference compatibility (attribute) on the support tie and threat tie formation as well as the effect of support/threat tie with third parties at t-1 period on support tie formation from patron to potential ally at time t, we will use SAOM model to statistically capture the coevolution of networks.
+
+Furthermore, since we are examining the fear of abandonment and how the potential ally’s behavior with third-party help reduces that fear, we need to control for the confounding effect of the fear of entrapment, defined as the patron’s perception that, after including the potential ally in the alliance, the potential ally might later drag the patron into an unwanted war. The patron's abandonment concerns incentivize the prospective ally to signal high resolve over the asset at stake with R. But if P instead harbors entrapment concerns (arguably the more common condition), then A's signaling incentives are reversed: it should try to signal low resolve by making concessions to R rather than taking a hard line. Therefore, we need to control for this confounder by including the variable on triadic geographic continuity (when A and R are close but P and R are far, P might fear entrapment) or regime type. 
+
+The following is a simple demostration of the basic structure of the network, using ICB dyad interstate conflict dataset for threat tie, and the COW alliance dataset for support tie.
+
+
+
+```{r read data}
+
+# Read data
+
+icb <- read.csv("icbdy_v16_2.csv")
+
+support <- read.csv("alliance_v4.1_by_dyad_yearly_2.csv")
+
+attributes <- read.csv("AgreementScoresAll_Jul2023_2.csv")
+
+library(dplyr)
+
+icb <- icb %>%
+  filter(year >= 1975)
+
+icb <- icb %>%
+  filter(year <= 2012)
+
+attributes <- attributes %>%
+  filter(year >= 1975)
+
+attributes <- attributes %>%
+  filter(year <= 2012)
+
+support <- support %>%
+  filter(year >= 1975)
+
+support <- support %>%
+  filter(year <= 2012)
+
+
+```
+
+
+```{r}
+
+# Cleaning
+
+support <- support %>% select(c(2, 4, 18))
+
+attributes <- attributes %>% select(-c(1, 2, 4, 5, 8, 9, 10, 11))
+
+attributes <- attributes[!duplicated(attributes[, c(1, 2, 3)]), ]
+
+icb <- icb %>% select(c(2, 4, 7))
+
+names(icb)[c(2, 3)] <- c("ccode1", "ccode2")
+
+icb <- icb %>% relocate(1, .after = 2)
+
+icb <- icb %>% relocate(2, .after = 3)
+
+names(attributes)[c(1)] <- c("ccode")
+
+support <- support[!duplicated(support[, c(1, 2, 3)]), ]
+
+
+```
+
+
+```{r}
+
+library(dplyr)
+library(network)
+library(networkDynamic)
+
+# Build node list
+nodes <- sort(unique(c(
+  icb$ccode1, icb$ccode2,
+  support$ccode1, support$ccode2,
+  attributes$ccode
+)))
+nodes <- nodes[!is.na(nodes)]
+
+node_map <- data.frame(
+  country = nodes,
+  id = seq_along(nodes),
+  stringsAsFactors = FALSE
+)
+
+# Spell builder
+make_edge_spells <- function(df, node_map) {
+  out <- df %>%
+    transmute(
+      tail = match(ccode1, node_map$country),
+      head = match(ccode2, node_map$country),
+      year = as.numeric(year)
+    ) %>%
+    filter(!is.na(tail), !is.na(head), !is.na(year)) %>%
+    arrange(tail, head, year) %>%
+    group_by(tail, head) %>%
+    mutate(
+      new_spell = c(TRUE, diff(year) != 1),
+      spell_id = cumsum(new_spell)
+    ) %>%
+    group_by(tail, head, spell_id) %>%
+    summarise(
+      onset = min(year),
+      terminus = max(year) + 1,
+      .groups = "drop"
+    ) %>%
+    select(tail, head, onset, terminus) %>%
+    mutate(
+      tail = as.integer(tail),
+      head = as.integer(head),
+      onset = as.numeric(onset),
+      terminus = as.numeric(terminus)
+    ) %>%
+    as.data.frame(stringsAsFactors = FALSE)
+
+  out
+}
+
+support_spells <- make_edge_spells(support, node_map)
+threat_spells  <- make_edge_spells(icb, node_map)
+
+
+support_spells <- support_spells %>% relocate(1, .after = 4)
+
+support_spells <- support_spells %>% relocate(1, .after = 4)
+
+
+threat_spells <- threat_spells %>% relocate(1, .after = 4)
+
+threat_spells <- threat_spells %>% relocate(1, .after = 4)
+
+# Build base network
+base_net <- network.initialize(n = nrow(node_map), directed = TRUE)
+network.vertex.names(base_net) <- as.character(node_map$country)
+
+# Create dynamic networks
+net_dyn_support <- networkDynamic(
+  base.net = base_net,
+  edge.spells = support_spells
+)
+
+net_dyn_threat <- networkDynamic(
+  base.net = base_net,
+  edge.spells = threat_spells
+)
+
+
+
+attributes_spells <- attributes %>%
+  dplyr::left_join(node_map, by = c("ccode" = "country")) %>%
+  dplyr::rename(vertex.id = id) %>%
+  dplyr::filter(!is.na(vertex.id)) %>%
+  dplyr::mutate(
+    year = as.numeric(as.character(year)),
+    onset = year,
+    terminus = year + 1,
+    vertex.id = as.integer(vertex.id)
+  ) %>%
+  dplyr::filter(!is.na(onset), !is.na(terminus), onset < terminus) %>%
+  dplyr::select(vertex.id, onset, terminus, IdealPointAll.x) %>%
+  as.data.frame(stringsAsFactors = FALSE)
+
+
+
+activate.vertex.attribute(
+  net_dyn_support,
+  prefix = "UNGA Ideal",
+  value = attributes_spells$IdealPointAll.x,
+  onset = attributes_spells$onset,
+  terminus = attributes_spells$terminus,
+  v = attributes_spells$vertex.id
+)
+
+
+activate.vertex.attribute(
+  net_dyn_threat,
+  prefix = "UNGA Ideal",
+  value = attributes_spells$IdealPointAll.x,
+  onset = attributes_spells$onset,
+  terminus = attributes_spells$terminus,
+  v = attributes_spells$vertex.id
+)
+
+plot(net_dyn_support)
+
+plot(net_dyn_threat)
+
+```
+
+
+```{r}
+
+library(ndtv)
+
+cols <- ifelse(is.na(attributes_spells$IdealPointAll.x), "gray80",
+                 ifelse(attributes_spells$IdealPointAll.x >= 0, "lightblue",
+                        ifelse(attributes_spells$IdealPointAll.x < 0, "red", "yellow")))
+
+slice.par <- list(start = 1975, end = 2013, interval = 1,
+                  aggregate.dur = 1, rule = "latest")
+
+set.network.attribute(net_dyn_support, 'slice.par', slice.par)
+
+render.d3movie(net_dyn_support, displaylabels = FALSE, 
+               vertex.cex = 1.5, vertex.col = cols,
+               output.mode = "HTML",
+               filename = "support_movie.html")
+
+```
+
+
+
+```{r}
+cols <- ifelse(is.na(attributes_spells$IdealPointAll.x), "gray80",
+                 ifelse(attributes_spells$IdealPointAll.x >= 0, "lightblue",
+                        ifelse(attributes_spells$IdealPointAll.x < 0, "red", "yellow")))
+
+slice.par <- list(start = 1975, end = 2013, interval = 1,
+                  aggregate.dur = 1, rule = "latest")
+
+set.network.attribute(net_dyn_threat, 'slice.par', slice.par)
+
+render.d3movie(net_dyn_threat, displaylabels = FALSE, 
+               vertex.cex = 1.5, vertex.col = cols,
+               output.mode = "HTML",
+               filename = "threat_movie.html")
+
+
+```
+
+# Visualization
+
+The code above helps create a network movie for both threat and support tie dynamics in the network between 1975 and 2013. However, note that due to the limitations of the ndtv package in R, the color of all nodes is determined by the ideal policy preference index in 1975 and will not change as the time period changes. Also, the package automatically drops nodes with no UNGA voting data. Therefore, I also present visualizations of snapshots of the network that include the ideal policy preference change over time, as well as the NA data in UNGA voting.
+
+The support tie network movie shows that over time, there are fewer peripheral countries without support ties to another country, implying that all countries are becoming more integrated into the international society. A similar pattern can also be observed by comparing the network snapshots “support network 1990” and “support network 2012” (the final figure). Moreover, from the network snapshot of the support tie, it shows that countries with similar ideal policy preferences are clustered together, while weak ties connect different clusters. However, the 1990 snapshot shows a hierarchy, with the central red node (Soviet Union) sending support ties to a few other countries. We do not see such a pattern in the 2012 snapshot, implying a multipolar world after the collapse of the Soviet Union.
+
+Support tie movie: file:///Users/flr/Desktop/Math-political%20science/R%20Working%20Directory/support_movie.html
+
+For the threat tie movie, on the other hand, we do not see a clear pattern changing over time. Moreover, there are few threat ties between countries, compared with the abundance of support ties between countries. This suggests a bias introduced by measuring threat ties only by conflict initiation, which may miss other dimensions, such as economic sanctions or diplomatic threats, that are also forms of threat ties sent to the rival. However, as shown in the “Threat Network 1990” and “Threat Network 2012,” the model does precisely predict the 1990 Iraq War and the 2012 Libya War, showing that the coding in our research is correct.
+
+Threat tie movie: file:///Users/flr/Desktop/Math-political%20science/R%20Working%20Directory/threat_movie.html
+
+
+
+
+
+
+
+
+```{r}
+
+extract_nets_s <- get.networks(
+  net_dyn_support,
+  start = 1975,
+  end = 2013,
+  time.increment = 1,
+  aggregate.dur = 1,
+  rule = "latest"
+)
+
+
+# Helper: build colors from attributes df for a given year
+get_cols_for_year <- function(g, yr, attributes_df, attr_name = "IdealPointAll.x") {
+  vnames <- as.character(network::network.vertex.names(g))
+  
+  a <- attributes_df %>%
+    dplyr::mutate(
+      ccode = as.character(ccode),
+      year = as.numeric(as.character(year))
+    ) %>%
+    dplyr::filter(year == yr) %>%
+    dplyr::select(ccode, !!rlang::sym(attr_name)) %>%
+    dplyr::distinct(ccode, .keep_all = TRUE)
+  
+  vals <- a[[attr_name]][match(vnames, a$ccode)]
+  
+  cols <- ifelse(is.na(vals), "gray80",
+                 ifelse(vals >= 0, "lightblue",
+                        ifelse(vals < 0, "red", "yellow")))
+  cols
+}
+
+start_year <- 1975
+inc <- 1
+
+yr1_s <- 1990
+yr2_s <- 2012
+
+
+i1_s <- ((yr1_s - start_year) / inc) + 1
+i2_s <- ((yr2_s - start_year) / inc) + 1
+
+cols1_s <- get_cols_for_year(extract_nets_s[[i1_s]], yr1_s, attributes, "IdealPointAll.x")
+cols2_s <- get_cols_for_year(extract_nets_s[[i2_s]], yr2_s, attributes, "IdealPointAll.x")
+
+locs <- network::network.layout.fruchtermanreingold(extract_nets_s[[i2_s]], layout.par = NULL)
+
+par(mfrow = c(1, 2))
+
+plot(extract_nets_s[[i1_s]],
+     main = paste("Support Network (coord 2012),", yr1_s),
+     vertex.col = cols1_s,
+     vertex.cex = 2,
+     coord = locs)
+
+plot(extract_nets_s[[i2_s]],
+     main = paste("Support Network (coord 2012),", yr2_s),
+     vertex.col = cols2_s,
+     vertex.cex = 2,
+     coord = locs)
+
+legend("topright",
+       legend = c("Negative ideal point", "Positive ideal point", "Zero", "Missing"),
+       col = c("red", "lightblue", "Yellow", "gray80"),
+       pch = 19, bty = "n", cex = 0.8)
+
+```
+
+```{r}
+
+
+extract_nets_t <- get.networks(
+  net_dyn_threat,
+  start = 1975,
+  end = 2013,
+  time.increment = 1,
+  aggregate.dur = 1,
+  rule = "latest"
+)
+
+
+
+yr1_t <- 1990
+yr2_t <- 2012
+
+
+i1_t <- ((yr1_t - start_year) / inc) + 1
+i2_t <- ((yr2_t - start_year) / inc) + 1
+
+colt1 <- get_cols_for_year(extract_nets_t[[i1_t]], yr1_t, attributes, "IdealPointAll.x")
+colt2 <- get_cols_for_year(extract_nets_t[[i2_t]], yr2_t, attributes, "IdealPointAll.x")
+
+locs <- network::network.layout.fruchtermanreingold(extract_nets_t[[i1_t]], layout.par = NULL)
+
+par(mfrow = c(1, 2))
+
+plot(extract_nets_t[[i1_t]],
+     main = paste("Threat Network (coord 1990),", yr1_t),
+     vertex.col = colt1,
+     vertex.cex = 2,
+     coord = locs)
+
+plot(extract_nets_t[[i2_t]],
+     main = paste("Threat Network (coord 1990),", yr2_t),
+     vertex.col = colt2,
+     vertex.cex = 2,
+     coord = locs)
+
+legend("topright",
+       legend = c("Negative ideal point", "Positive ideal point", "Zero", "Missing"),
+       col = c("red", "lightblue", "Yellow", "gray80"),
+       pch = 19, bty = "n", cex = 0.8)
+
+
+
+
+
+```
+
+```{r}
+par(mfrow = c(1, 2))
+
+plot(extract_nets_s[[i1_s]],
+     main = paste("Support Network,", yr1_s),
+     vertex.col = cols1_s,
+     vertex.cex = 2)
+
+plot(extract_nets_s[[i2_s]],
+     main = paste("Support Network,", yr2_s),
+     vertex.col = cols2_s,
+     vertex.cex = 2)
+
+legend("topright",
+       legend = c("Negative ideal point", "Positive ideal point", "Zero", "Missing"),
+       col = c("red", "lightblue", "Yellow", "gray80"),
+       pch = 19, bty = "n", cex = 0.8)
+```
+
+```{r}
+par(mfrow = c(1, 2))
+
+plot(extract_nets_t[[i1_t]],
+     main = paste("Threat Network,", yr1_t),
+     vertex.col = colt1,
+     vertex.cex = 2)
+
+plot(extract_nets_t[[i2_t]],
+     main = paste("Threat Network,", yr2_t),
+     vertex.col = colt2,
+     vertex.cex = 2)
+
+legend("topright",
+       legend = c("Negative ideal point", "Positive ideal point", "Zero", "Missing"),
+       col = c("red", "lightblue", "Yellow", "gray80"),
+       pch = 19, bty = "n", cex = 0.8)
+
+
+
+
+
+
+```
+
+# SAOM Preliminary Result (H1b and H2b)
+
+Now we will use the SAOM to obtain preliminary results for H1b and H2b. Recall that these two hypotheses are:
+
+H1b: When conflict is incited by the potential ally against the common rival, there will be a stronger support tie between the potential ally and the patron. 
+
+H2b: When the concession is made by the potential ally to the client, there will be a stronger support tie between the potential ally and the patron.
+
+Since in this preliminary analysis we use a binary measure of support and threat tie, we cannot obtain the strength of tie in this research. Therefore, we alter the original expectation in our hypothesis to: 
+
+H1b: When conflict is incited by the potential ally against the common rival, there will be a higher likelihood of a support tie formed between the potential ally and the patron. 
+
+H2b: When the concession is made by the potential ally to the client, there will be a higher likelihood of a support tie formed between the potential ally and the patron.
+
+Hence, in this preliminary analysis, we are exploring the following question: Does a potential ally’s new threat tie to the patron’s rival, or a reduced threat tie to the patron's client, increase the likelihood that the patron will form a support tie with that potential ally in the next period? However, one might argue that SAOM does not isolate support-tie creation only where the model tests whether establishing a threat tie with the patron’s rival increases the tendency for a support tie to exist between the patron and the potential ally. As a result, such hypotheses may face the problem of reverse causality. Specifically, it could be that the existing support tie between the potential ally and the patron causes the potential ally's need to maintain that support, meaning that the statistically significant effect we observe may be due to the existing support tie predicting future support, rather than the exogenous effect of fighting against a common rival. Nonetheless, I contend that this reverse causality does not necessarily threaten the validity of our theory, because only those with some (but not high) preference incompatibility will seek to reassure the patron by fighting against a common rival. For those already sharing high preference compatibility (indicating an existing support tie), if the patron is fighting a rival and the potential ally is not, the potential ally has no incentive to reassure the patron since inciting a threat tie is costly, and they can simply freeride on the patron's efforts. Therefore, as long as H1a holds true (potential ally with high preference compatibility are less likely to create threat ties against common rivals to reassure the patron), the results from H1b still demonstrate that fighting against the common rival can effectively reassure the patron and therefore form the support tie.
+
+Here, we construct the variable ally_joins_threat as a binary variable where it equals one if and only if all the following conditions are satisfied: (1) patron and rival have a threat tie at time $t-1$, (2) potential ally and rival do not have a threat tie at time $t-1$, and (3) potential ally and rival have a threat tie at time $t$. The dependent variable is the support tie between patron and potential ally at time $t$.
+
+
+
+
+
+```{r SAOM}
+
+library(dplyr)
+library(RSiena)
+
+# Define years and node list
+
+
+years <- 1975:2012
+T <- length(years)
+n <- nrow(node_map)
+
+
+# Helper function: build n x n x T network array
+
+
+make_siena_array <- function(df, node_map, years, directed = TRUE) {
+  
+  n <- nrow(node_map)
+  T <- length(years)
+  
+  arr <- array(0, dim = c(n, n, T))
+  
+  df2 <- df %>%
+    mutate(
+      tail = match(ccode1, node_map$country),
+      head = match(ccode2, node_map$country),
+      year_index = match(year, years)
+    ) %>%
+    filter(
+      !is.na(tail),
+      !is.na(head),
+      !is.na(year_index),
+      tail != head
+    )
+  
+  for (r in seq_len(nrow(df2))) {
+    i <- df2$tail[r]
+    j <- df2$head[r]
+    tt <- df2$year_index[r]
+    
+    arr[i, j, tt] <- 1
+    
+    # If the network is undirected, symmetrize it
+    if (!directed) {
+      arr[j, i, tt] <- 1
+    }
+  }
+  
+  for (tt in seq_len(T)) {
+    diag(arr[, , tt]) <- 0
+  }
+  
+  return(arr)
+}
+
+
+```
+
+```{r}
+
+
+# Build support and threat arrays
+
+
+support_array <- make_siena_array(
+  df = support,
+  node_map = node_map,
+  years = years,
+  directed = FALSE   # (change to TRUE if support has direction)
+)
+
+threat_array <- make_siena_array(
+  df = icb,
+  node_map = node_map,
+  years = years,
+  directed = TRUE
+)
+
+
+
+```
+
+
+
+
+
+```{r}
+
+# Construct ally-joins-patron-threat variable
+
+
+ally_joins_threat <- array(0, dim = c(n, n, T - 1))
+
+for (tt in 2:T) {
+  
+  threat_lag <- threat_array[, , tt - 1]
+  threat_now <- threat_array[, , tt]
+  
+  new_threat <- ifelse(threat_lag == 0 & threat_now == 1, 1, 0)
+  
+  shared_rival_join <- threat_lag %*% t(new_threat)
+  
+  ally_joins_threat[, , tt - 1] <- ifelse(shared_rival_join > 0, 1, 0)
+  
+  diag(ally_joins_threat[, , tt - 1]) <- 0
+}
+```
+
+
+```{r}
+
+# Create actor-year covariate matrix
+
+
+ideal_mat <- matrix(NA, nrow = n, ncol = T)
+
+attributes2 <- attributes %>%
+  left_join(node_map, by = c("ccode" = "country")) %>%
+  mutate(year_index = match(year, years)) %>%
+  filter(!is.na(id), !is.na(year_index))
+
+for (r in seq_len(nrow(attributes2))) {
+  i <- attributes2$id[r]
+  tt <- attributes2$year_index[r]
+  ideal_mat[i, tt] <- attributes2$IdealPointAll.x[r]
+}
+
+# Optional: replace missing ideal points with actor mean
+actor_means <- rowMeans(ideal_mat, na.rm = TRUE)
+
+for (i in 1:nrow(ideal_mat)) {
+  ideal_mat[i, is.na(ideal_mat[i, ])] <- actor_means[i]
+}
+
+# If some countries are still all missing, replace with grand mean
+grand_mean <- mean(ideal_mat, na.rm = TRUE)
+ideal_mat[is.na(ideal_mat)] <- grand_mean
+
+
+```
+
+```{r}
+
+# Create RSiena dependent networks and covariates
+
+
+# Construct ally-joins-threat as n x n x (T - 1)
+
+
+supportNet <- sienaDependent(support_array, type = "oneMode")
+threatNet  <- sienaDependent(threat_array, type = "oneMode")
+
+allyJoinThreat <- varDyadCovar(ally_joins_threat)
+ungaIdeal <- varCovar(ideal_mat)
+
+mydata <- sienaDataCreate(
+  supportNet,
+  threatNet,
+  allyJoinThreat,
+  ungaIdeal
+)
+
+
+```
+
+
+```{r}
+
+# Create support-only Siena data object
+
+
+mydata_support_only <- sienaDataCreate(
+  supportNet,
+  allyJoinThreat,
+  ungaIdeal
+)
+
+myeff4 <- getEffects(mydata_support_only)
+
+# Baseline density
+myeff4 <- includeEffects(
+  myeff4,
+  density,
+  name = "supportNet"
+)
+
+# Degree of alter / indegree popularity
+myeff4 <- includeEffects(
+  myeff4,
+  inPop,
+  name = "supportNet"
+)
+
+# Key hypothesis
+myeff4 <- includeEffects(
+  myeff4,
+  X,
+  interaction1 = "allyJoinThreat",
+  name = "supportNet"
+)
+
+# UNGA ideal-point similarity
+myeff4 <- includeEffects(
+  myeff4,
+  simX,
+  interaction1 = "ungaIdeal",
+  name = "supportNet"
+)
+
+# UNGA ideal-point alter effect
+myeff4 <- includeEffects(
+  myeff4,
+  altX,
+  interaction1 = "ungaIdeal",
+  name = "supportNet"
+)
+
+# Check included effects
+as.data.frame(myeff4)[as.data.frame(myeff4)$include == TRUE, ]
+
+alg4 <- sienaAlgorithmCreate(
+  projname = "support_model_allyJoinThreat_altX",
+  n3 = 1000,
+  seed = 12345
+)
+
+fit4 <- siena07(
+  alg4,
+  data = mydata_support_only,
+  effects = myeff4,
+  batch = TRUE,
+  returnDeps = FALSE,
+  useCluster = FALSE
+)
+
+summary(fit4)
+
+
+```
+
+Note that because support ties (alliance) are observed as symmetric dyadic relations, I do not include a reciprocity effect in the support-network equation. The coefficient for the independent variable is 3.0155 with standard error 1.3132. The results from SAOM show there is statistically significant evidence that creating a threat tie with a common rival by a potential ally is positively correlated with the likelihood of a support tie between the patron and the potential ally in the next period. Such a finding supports hypothesis H1b.
+
+Also, the control variables in this model yield some interesting results. The negative, statistically significant coefficient for eval density shows that support ties are generally sparse, as actors are less likely to create ties unless other mechanisms motivate them. The positive, statistically significant coefficient for the degree of alter indicates the Matthew Effect, where states are more likely to support actors who are already central or popular in the support network. The positive, statistically significant coefficient for ungaIdeal alter suggests that pro-U.S. actors (high ungaIdeal) are more likely to receive support ties. Additionally, the positive, statistically significant coefficient for ungaIdeal similarity indicates that states are much more likely to form support ties with ideologically similar states.
+
+Now, we apply a similar method to test H2b. The only difference is that the independent variable in this case is patron_client_threat_reduction. This variable is a binary variable where it equals one if and only if all the following conditions are met: (1) the patron and client have a support tie at time $t-1$, (2) the potential ally and client have a threat tie at time $t-1$, and (3) the potential ally and client do not have a threat tie or have a support tie at time $t$. The dependent variable remains the support tie between patron and potential ally at time $t$.
+
+
+
+```{r SAOM 22}
+
+library(dplyr)
+library(RSiena)
+
+
+# 1. Define years and dimensions
+
+
+years <- 1975:2012
+T <- length(years)
+n <- nrow(node_map)
+
+
+# 2. Fast helper: build n x n x T Siena array
+
+make_siena_array_fast <- function(df, node_map, years, directed = TRUE) {
+  
+  n <- nrow(node_map)
+  T <- length(years)
+  
+  arr <- array(0, dim = c(n, n, T))
+  
+  df2 <- df %>%
+    mutate(
+      tail = match(ccode1, node_map$country),
+      head = match(ccode2, node_map$country),
+      year_index = match(year, years)
+    ) %>%
+    filter(
+      !is.na(tail),
+      !is.na(head),
+      !is.na(year_index),
+      tail != head
+    ) %>%
+    distinct(tail, head, year_index)
+  
+  arr[cbind(df2$tail, df2$head, df2$year_index)] <- 1
+  
+  if (!directed) {
+    arr[cbind(df2$head, df2$tail, df2$year_index)] <- 1
+  }
+  
+  for (tt in seq_len(T)) {
+    diag(arr[, , tt]) <- 0
+  }
+  
+  return(arr)
+}
+
+# 3. Build support and threat arrays
+
+
+support_array <- make_siena_array_fast(
+  df = support,
+  node_map = node_map,
+  years = years,
+  directed = FALSE
+)
+
+threat_array <- make_siena_array_fast(
+  df = icb,
+  node_map = node_map,
+  years = years,
+  directed = TRUE
+)
+
+
+# 4. Construct patron-client threat-reduction variable
+
+
+patron_client_threat_reduction <- array(0, dim = c(n, n, T - 1))
+
+for (tt in 2:T) {
+  
+  support_lag <- support_array[, , tt - 1]
+  support_now <- support_array[, , tt]
+  
+  threat_lag <- threat_array[, , tt - 1]
+  threat_now <- threat_array[, , tt]
+  
+
+  threat_reduction <- (threat_lag == 1) & 
+    ((threat_now == 0) | (support_now == 1))
+  
+  storage.mode(threat_reduction) <- "numeric"
+
+  
+  temp <- support_lag %*% t(threat_reduction)
+  
+  patron_client_threat_reduction[, , tt - 1] <- ifelse(temp > 0, 1, 0)
+  
+  diag(patron_client_threat_reduction[, , tt - 1]) <- 0
+}
+
+patronClientThreatReduction <- varDyadCovar(
+  patron_client_threat_reduction
+)
+
+
+```
+
+```{r}
+
+
+# 6. Create support-only Siena data object
+
+
+supportNet <- sienaDependent(
+  support_array,
+  type = "oneMode"
+)
+
+mydata_support_only <- sienaDataCreate(
+  supportNet,
+  patronClientThreatReduction,
+  ungaIdeal
+)
+
+
+# 7. Specify effects with additional controls, no reciprocity
+
+
+myeff_fast <- getEffects(mydata_support_only)
+
+# Baseline support-tie tendency
+myeff_fast <- includeEffects(
+  myeff_fast,
+  density,
+  name = "supportNet"
+)
+
+# Degree of alter / indegree popularity
+myeff_fast <- includeEffects(
+  myeff_fast,
+  inPop,
+  name = "supportNet"
+)
+
+# Key hypothesis
+myeff_fast <- includeEffects(
+  myeff_fast,
+  X,
+  interaction1 = "patronClientThreatReduction",
+  name = "supportNet"
+)
+
+# Keep only UNGA alter
+myeff_fast <- includeEffects(
+  myeff_fast,
+  altX,
+  interaction1 = "ungaIdeal",
+  name = "supportNet"
+)
+
+# UNGA similarity
+myeff_fast <- includeEffects(
+  myeff_fast,
+  simX,
+  interaction1 = "ungaIdeal",
+  name = "supportNet"
+)
+
+as.data.frame(myeff_fast)[
+  as.data.frame(myeff_fast)$include == TRUE,
+]
+
+alg_fast_controls <- sienaAlgorithmCreate(
+  projname = "support_threat_reduction_drop_ego_degree",
+  n3 = 1000,
+  seed = 12345
+)
+
+fit_fast_controls <- siena07(
+  alg_fast_controls,
+  data = mydata_support_only,
+  effects = myeff_fast,
+  batch = TRUE,
+  returnDeps = FALSE,
+  useCluster = FALSE
+)
+
+summary(fit_fast_controls)
+
+
+
+```
+
+The result from the SAOM indicates that there is statistically significant evidence that offering concessions to a patron's client is positively correlated to the likelihood of a support tie between the patron and a potential ally exists in the next period, with coefficient 1.8202 and standard error 0.5933. This result supports the hypothesis H2b. Moreover, all the control variables yield same trend comparing with the model testing H1b, implying high robustness for both models. In conclusion, applying SAOM provides evidence that offering concessions to patrons or countering patrons' rivals can effectively reassure them, resulting in a support tie between patrons and potential allies in the next period. 
+
+Potential limitations of this method include that the preliminary model only accounts for preference compatibility for each country. A comprehensive model controlling for additional covariates such as military spending, GDP, regime type, etc., is necessary for internal validity in this study. Furthermore, this research only uses conflict data for threat ties and alliance data for support ties. However, there are other indicators for threat (economic sanctions, strategic rivalry) and for support (arms trade, external assistance). Using a Bayesian IRT model to derive posterior indicators for threat and support ties could lead to more accurate measurements of these relationships. Moreover, although the main theory of this paper is not affected by reverse causality as previously mentioned, it would be beneficial to define the scope of the dependent variable as "newly created support tie between patron and potential ally" to strengthen the robustness of our theory. Another concern is that, for the specific dyad dataset we selected, the relationship between two countries is treated as symmetric. Since we are specifically examining whether the potential ally creates a threat tie to the rival or reduces the threat towards the rival, a symmetric relationship does not fully capture this behavior. Therefore, it is important to find a dataset that includes information on who incites or ends the threat to ensure the robustness of our theory.
+
